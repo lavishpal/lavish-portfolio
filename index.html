@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lavish Pal — Platform Engineer</title>
+
+<meta
+  name="description"
+  content="Lavish Pal — Platform Engineer / DevOps / SRE. Kubernetes, etcd, Kyverno, CNCF open source."
+>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+>
+
+<script>
+  (function(){
+    try{
+      var saved = localStorage.getItem('theme');
+
+      var theme = saved
+        ? saved
+        : (
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+          );
+
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){}
+  })();
+</script>
+
+<style>
+
+  /* =========================================================
+     THEME VARIABLES
+     ========================================================= */
+
+  :root{
+    --bg: #F5F6F8;
+    --surface: #FFFFFF;
+    --ink: #14181F;
+    --muted: #5B6472;
+    --faint: #8A93A1;
+    --line: #DEE2E7;
+
+    --accent: #2F6F5E;
+    --accent-soft: #E4EFEC;
+
+    --amber: #B5741F;
+    --amber-soft: #F3E7D6;
+
+    --blue: #3F57B0;
+    --blue-soft: #E6E9F6;
+
+    --max: 660px;
+  }
+
+
+  html[data-theme="dark"]{
+    --bg: #101315;
+    --surface: #181C1F;
+    --ink: #ECEEF0;
+    --muted: #A9B1BB;
+    --faint: #6E7680;
+    --line: #292E33;
+
+    --accent: #55B296;
+    --accent-soft: rgba(85, 178, 150, 0.14);
+
+    --amber: #DDA35C;
+    --amber-soft: rgba(221, 163, 92, 0.14);
+
+    --blue: #8092DE;
+    --blue-soft: rgba(128, 146, 222, 0.14);
+  }
+
+
+  /* =========================================================
+     GLOBAL
+     ========================================================= */
+
+  html,
+  body{
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+
+  body,
+  .tag,
+  .work-item,
+  .work-tags span,
+  .links a,
+  .flat-list li,
+  .flat-list a.title,
+  .contact,
+  .status,
+  .writing-toggle,
+  .writing-tags span{
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+
+  @media (prefers-reduced-motion: reduce){
+
+    html,
+    body,
+    .tag,
+    .work-item,
+    .work-tags span,
+    .links a,
+    .flat-list li,
+    .flat-list a.title,
+    .contact,
+    .status,
+    .writing-toggle,
+    .writing-tags span{
+      transition: none;
+    }
+  }
+
+
+  *{
+    box-sizing: border-box;
+  }
+
+
+  html{
+    scroll-behavior: smooth;
+  }
+
+
+  @media (prefers-reduced-motion: reduce){
+
+    html{
+      scroll-behavior: auto;
+    }
+
+    *{
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+
+    font-family: 'Source Serif 4', Georgia, serif;
+
+    font-size: 17px;
+    line-height: 1.65;
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 96px 24px 64px;
+  }
+
+
+  h1,
+  h2,
+  h3,
+  .eyebrow,
+  .mono{
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+
+  a{
+    color: inherit;
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .hero{
+    margin-bottom: 88px;
+  }
+
+
+  .hero .role{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 13px;
+    letter-spacing: 0.04em;
+
+    color: var(--accent);
+
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+  }
+
+
+  .hero .role .dot{
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--accent);
+
+    display: inline-block;
+
+    flex: none;
+  }
+
+
+  h1{
+    font-size: 42px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.01em;
+
+    margin: 0 0 6px;
+
+    line-height: 1.08;
+  }
+
+
+  .subline{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 13px;
+
+    color: var(--faint);
+
+    margin: 0 0 28px;
+  }
+
+
+  .bio{
+    font-size: 19px;
+
+    color: var(--muted);
+
+    max-width: 56ch;
+
+    margin: 0;
+
+    text-align: justify;
+  }
+
+
+  .bio strong{
+    color: var(--ink);
+
+    font-weight: 600;
+  }
+
+
+  .tags{
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 28px;
+  }
+
+
+  .tag{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    border: 1px solid var(--line);
+
+    border-radius: 4px;
+
+    padding: 4px 9px;
+
+    background: var(--surface);
+  }
+
+
+  /* =========================================================
+     NAVIGATION
+     ========================================================= */
+
+  .site-nav{
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+    background: var(--bg);
+
+    border-bottom: 1px solid transparent;
+  }
+
+
+  .site-nav.scrolled{
+    border-bottom-color: var(--line);
+  }
+
+
+  .nav-inner{
+    max-width: var(--max);
+
+    margin: 0 auto;
+
+    padding: 18px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 22px;
+  }
+
+
+  .nav-link{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    letter-spacing: 0.03em;
+
+    color: var(--muted);
+
+    text-decoration: none;
+  }
+
+
+  .nav-link:hover{
+    color: var(--accent);
+  }
+
+
+  .nav-link:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 3px;
+
+    border-radius: 2px;
+  }
+
+
+  .theme-toggle{
+    width: 30px;
+    height: 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--line);
+
+    background: var(--surface);
+
+    border-radius: 6px;
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+
+  .theme-toggle:hover{
+    border-color: var(--accent);
+
+    color: var(--accent);
+  }
+
+
+  .theme-toggle:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 2px;
+  }
+
+
+  .theme-toggle svg{
+    width: 15px;
+    height: 15px;
+  }
+
+
+  .theme-toggle .icon-moon{
+    display: none;
+  }
+
+
+  html[data-theme="dark"] .theme-toggle .icon-sun{
+    display: none;
+  }
+
+
+  html[data-theme="dark"] .theme-toggle .icon-moon{
+    display: inline-flex;
+  }
+
+
+  @media (max-width: 560px){
+
+    .nav-inner{
+      gap: 14px;
+
+      padding: 14px 20px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .nav-link{
+      font-size: 11px;
+    }
+  }
+
+
+  /* =========================================================
+     SECTION SCAFFOLDING
+     ========================================================= */
+
+  section{
+    margin-bottom: 72px;
+  }
+
+
+  .eyebrow{
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    color: var(--faint);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 28px;
+  }
+
+
+  .eyebrow::after{
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: var(--line);
+  }
+
+
+  /* =========================================================
+     WORK ITEMS
+     ========================================================= */
+
+  .work-item{
+    padding: 26px 0;
+
+    border-top: 1px solid var(--line);
+  }
+
+
+  .work-item:last-child{
+    padding-bottom: 0;
+  }
+
+
+  .work-head{
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: baseline;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 8px;
+  }
+
+
+  .work-title{
+    font-size: 20px;
+
+    font-weight: 600;
+
+    margin: 0;
+  }
+
+
+  .status{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+
+    padding: 3px 9px;
+
+    border-radius: 4px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+  }
+
+
+  .status::before{
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+  }
+
+
+  .status.merged{
+    background: var(--accent-soft);
+
+    color: var(--accent);
+  }
+
+
+  .status.merged::before{
+    background: var(--accent);
+  }
+
+
+  .status.progress{
+    background: var(--amber-soft);
+
+    color: var(--amber);
+  }
+
+
+  .status.progress::before{
+    background: var(--amber);
+  }
+
+
+  .status.ongoing{
+    background: var(--blue-soft);
+
+    color: var(--blue);
+  }
+
+
+  .status.ongoing::before{
+    background: var(--blue);
+  }
+
+
+  .work-desc{
+    color: var(--muted);
+
+    margin: 0 0 12px;
+
+    font-size: 16px;
+  }
+
+
+  .work-tags{
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+
+  .work-tags span{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: var(--faint);
+  }
+
+
+  .work-tags span:not(:last-child)::after{
+    content: "·";
+
+    margin-left: 7px;
+
+    color: var(--line);
+  }
+
+
+  .work-date{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    color: var(--faint);
+
+    white-space: nowrap;
+  }
+
+
+  .work-org{
+    font-size: 15px;
+
+    color: var(--muted);
+
+    margin: -4px 0 12px;
+  }
+
+
+  .work-bullets{
+    list-style: none;
+
+    margin: 0 0 12px;
+
+    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+
+  .work-bullets li{
+    color: var(--muted);
+
+    font-size: 16px;
+
+    padding-left: 18px;
+
+    position: relative;
+
+    text-align: justify;
+  }
+
+
+  .work-bullets li::before{
+    content: "—";
+
+    position: absolute;
+
+    left: 0;
+
+    color: var(--faint);
+  }
+
+
+  /* =========================================================
+     WRITING SECTION
+     ========================================================= */
+
+  .writing-list{
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+  }
+
+
+  .writing-item{
+    padding: 26px 0 30px;
+
+    border-top: 1px solid var(--line);
+  }
+
+
+  .writing-item:first-child{
+    border-top: none;
+
+    padding-top: 0;
+  }
+
+
+  .writing-item:last-child{
+    padding-bottom: 0;
+  }
+
+
+  .writing-header{
+    display: flex;
+
+    align-items: baseline;
+
+    justify-content: space-between;
+
+    gap: 24px;
+  }
+
+
+  .writing-title{
+    font-family: 'Space Grotesk', sans-serif;
+
+    font-size: 19px;
+
+    font-weight: 500;
+
+    line-height: 1.45;
+
+    color: var(--ink);
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+  }
+
+
+  .writing-title:hover{
+    color: var(--accent);
+  }
+
+
+  .writing-title:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 4px;
+
+    border-radius: 2px;
+  }
+
+
+  .writing-description{
+    margin: 10px 0 14px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.65;
+
+    max-width: 65ch;
+
+    text-align: justify;
+  }
+
+
+  .writing-tags{
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 16px;
+  }
+
+
+  .writing-tags span{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: var(--faint);
+
+    border: 1px solid var(--line);
+
+    background: var(--surface);
+
+    border-radius: 4px;
+
+    padding: 4px 8px;
+  }
+
+
+  .writing-toggle{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    background: transparent;
+
+    border: 1px solid var(--line);
+
+    border-radius: 4px;
+
+    padding: 5px 9px;
+
+    cursor: pointer;
+
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+
+  .writing-toggle:hover{
+    color: var(--accent);
+
+    border-color: var(--accent);
+
+    background: var(--accent-soft);
+  }
+
+
+  .writing-toggle:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 3px;
+  }
+
+
+  /* Full blog content */
+
+  .writing-content{
+    display: none;
+
+    margin-top: 24px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid var(--line);
+  }
+
+
+  .writing-content.open{
+    display: block;
+  }
+
+
+  .writing-content h3{
+    font-family: 'Space Grotesk', sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: var(--ink);
+
+    margin: 28px 0 10px;
+  }
+
+
+  .writing-content h3:first-child{
+    margin-top: 0;
+  }
+
+
+  .writing-content p{
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    margin: 0 0 18px;
+
+    text-align: justify;
+  }
+
+
+  .writing-content ul{
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    margin: 0 0 20px;
+
+    padding-left: 22px;
+  }
+
+
+  .writing-content li{
+    margin-bottom: 8px;
+  }
+
+
+  .writing-content a{
+    color: var(--accent);
+
+    text-underline-offset: 3px;
+  }
+
+
+  .writing-content strong{
+    color: var(--ink);
+
+    font-weight: 600;
+  }
+
+
+  .writing-external{
+    display: inline-block;
+
+    margin-top: 4px;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: var(--accent);
+
+    text-decoration: none;
+  }
+
+
+  .writing-external:hover{
+    text-decoration: underline;
+
+    text-underline-offset: 3px;
+  }
+
+
+  /* =========================================================
+     TALKS
+     ========================================================= */
+
+  .flat-list{
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+
+  .flat-list li{
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 16px 0;
+
+    border-top: 1px solid var(--line);
+
+    flex-wrap: wrap;
+  }
+
+
+  .flat-list li:first-child{
+    border-top: none;
+  }
+
+
+  .flat-list .title{
+    font-weight: 600;
+
+    color: var(--ink);
+
+    text-decoration: none;
+  }
+
+
+  .flat-list a.title{
+    text-underline-offset: 3px;
+  }
+
+
+  .flat-list a.title:hover{
+    color: var(--accent);
+
+    text-decoration: underline;
+  }
+
+
+  .flat-list a.title:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 3px;
+
+    border-radius: 2px;
+  }
+
+
+  .flat-list .meta{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    color: var(--faint);
+
+    white-space: nowrap;
+  }
+
+
+  .flat-list p{
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    width: 100%;
+
+    text-align: justify;
+  }
+
+
+  /* =========================================================
+     COMMUNITY
+     ========================================================= */
+
+  .community-description{
+    text-align: justify;
+  }
+
+
+  /* =========================================================
+     CONTACT
+     ========================================================= */
+
+  .contact{
+    border-top: 1px solid var(--line);
+
+    padding-top: 40px;
+  }
+
+
+  .contact h2{
+    font-size: 26px;
+
+    margin: 0 0 12px;
+  }
+
+
+  .contact p{
+    color: var(--muted);
+
+    max-width: 48ch;
+
+    margin: 0 0 24px;
+  }
+
+
+  .links{
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+
+  .links a{
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    border: 1px solid var(--line);
+
+    background: var(--surface);
+
+    padding: 9px 16px;
+
+    border-radius: 6px;
+
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+
+  .links a:hover{
+    border-color: var(--accent);
+
+    color: var(--accent);
+  }
+
+
+  .links a:focus-visible{
+    outline: 2px solid var(--accent);
+
+    outline-offset: 2px;
+  }
+
+
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+
+  footer{
+    max-width: var(--max);
+
+    margin: 0 auto;
+
+    padding: 0 24px 48px;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    color: var(--faint);
+  }
+
+
+  /* =========================================================
+     REVEAL ANIMATION
+     ========================================================= */
+
+  .reveal{
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    animation: rise 0.6s ease forwards;
+  }
+
+
+  @keyframes rise{
+
+    to{
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 560px){
+
+    .wrap{
+      padding: 64px 20px 48px;
+    }
+
+
+    h1{
+      font-size: 32px;
+    }
+
+
+    .bio{
+      font-size: 17px;
+
+      text-align: left;
+    }
+
+
+    .work-head{
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+
+
+    .work-bullets li{
+      text-align: left;
+    }
+
+
+    .writing-item{
+      padding: 22px 0 26px;
+    }
+
+
+    .writing-header{
+      flex-direction: column;
+
+      align-items: flex-start;
+
+      gap: 6px;
+    }
+
+
+    .writing-title{
+      font-size: 18px;
+    }
+
+
+    .writing-description{
+      font-size: 15px;
+
+      text-align: left;
+    }
+
+
+    .writing-content p{
+      text-align: left;
+    }
+
+
+    .flat-list p{
+      text-align: left;
+    }
+
+  }
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+<nav class="site-nav" id="site-nav">
+
+  <div class="nav-inner">
+
+    <a class="nav-link" href="#writing">
+      Writing
+    </a>
+
+    <a class="nav-link" href="#projects">
+      Projects
+    </a>
+
+    <a class="nav-link" href="#talks">
+      Talks
+    </a>
+
+    <a class="nav-link" href="#about">
+      About
+    </a>
+
+
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      type="button"
+      aria-label="Switch to dark theme"
+    >
+
+      <svg
+        class="icon-sun"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+        ></circle>
+
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        ></path>
+
+      </svg>
+
+
+      <svg
+        class="icon-moon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path
+          d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
+        ></path>
+
+      </svg>
+
+    </button>
+
+  </div>
+
+</nav>
+
+
+<div class="wrap">
+
+
+<!-- =========================================================
+     HERO / ABOUT
+     ========================================================= -->
+
+<header
+  class="hero reveal"
+  id="about"
+>
+
+  <div class="role">
+
+    <span class="dot"></span>
+
+    Platform Engineer · DevOps · SRE
+
+  </div>
+
+
+  <h1>
+    Lavish Pal
+  </h1>
+
+
+  <p class="subline">
+    Greater Noida, India · open to remote
+  </p>
+
+
+  <p class="bio">
+
+    Open source contributor working across the Kubernetes ecosystem -
+    reviewer at <strong>Kubernetes</strong>, contributor at
+    <strong>etcd</strong>, <strong>Kyverno</strong> — and shipped release
+    notes as part of the <strong>Kubernetes v1.32 Release Team</strong>.
+    Currently Contributing to Chainguard's <strong>apko</strong> project.
+
+  </p>
+
+
+  <div class="tags">
+
+    <span class="tag">
+      Go
+    </span>
+
+    <span class="tag">
+      Kubernetes
+    </span>
+
+    <span class="tag">
+      etcd
+    </span>
+
+    <span class="tag">
+      CI/CD
+    </span>
+
+    <span class="tag">
+      GitOps
+    </span>
+
+    <span class="tag">
+      CNCF
+    </span>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     EXPERIENCE
+     ========================================================= -->
+
+<section
+  class="reveal"
+  style="animation-delay:0.1s"
+  id="experience"
+>
+
+  <div class="eyebrow">
+    Experience
+  </div>
+
+
+  <div class="work-item">
+
+    <div class="work-head">
+
+      <h3 class="work-title">
+        OSS Reviewer &amp; Contributor
+      </h3>
+
+      <span class="work-date">
+        Dec 2024 – Present
+      </span>
+
+    </div>
+
+
+    <p class="work-org">
+      Kubernetes, etcd, Kyverno
+    </p>
+
+
+    <ul class="work-bullets">
+
+      <li>
+        Reviewed incoming pull requests for
+        kubernetes-sigs/reference-docs, evaluating code organization
+        and design tradeoffs
+      </li>
+
+      <li>
+        Authored test cases and implemented CEL-based policy enforcement
+        for Kyverno, extending admission control coverage
+      </li>
+
+      <li>
+        Migrated etcdctl command implementations to the Cobra CLI framework
+        and added plugin support for etcd, including a major dependency
+        version bump across the module
+      </li>
+
+    </ul>
+
+
+    <div class="work-tags">
+
+      <span>Kubernetes</span>
+      <span>etcd</span>
+      <span>Kyverno</span>
+      <span>CEL</span>
+      <span>Go</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="work-item">
+
+    <div class="work-head">
+
+      <h3 class="work-title">
+        Linux Foundation Mentee
+      </h3>
+
+      <span class="work-date">
+        Sept 2025 – Nov 2025
+      </span>
+
+    </div>
+
+
+    <p class="work-org">
+      Kubernetes (LFX Mentorship), Remote
+    </p>
+
+
+    <ul class="work-bullets">
+
+      <li>
+        Refactored schema traversal logic in the Kubernetes API
+        reference-generator, improving correctness and maintainability
+        of generated API documentation used by the Kubernetes release team
+      </li>
+
+      <li>
+        Modernized API documentation workflows by replacing deprecated
+        GOPATH-based processes with module-aware tooling, reducing friction
+        for future contributors
+      </li>
+
+      <li>
+        Improved error handling and logging across configuration and writer
+        components, increasing robustness of the documentation build pipeline
+      </li>
+
+    </ul>
+
+
+    <div class="work-tags">
+
+      <span>Go</span>
+      <span>Kubernetes API</span>
+      <span>Documentation tooling</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="work-item">
+
+    <div class="work-head">
+
+      <h3 class="work-title">
+        DevOps Evangelist
+      </h3>
+
+      <span class="work-date">
+        April 2025 – Aug 2025
+      </span>
+
+    </div>
+
+
+    <p class="work-org">
+      Devtron, Gurugram, India
+    </p>
+
+
+    <ul class="work-bullets">
+
+      <li>
+        Designed and maintained CI/CD pipelines using GitLab CI,
+        Azure DevOps, and Argo CD on Linux infrastructure, enabling
+        automated deployments to Kubernetes clusters across multiple
+        environments
+      </li>
+
+      <li>
+        Deployed containerized applications on Kubernetes using Helm
+        and RWX persistent storage, building custom container images
+        and configuring NGINX for advanced request handling
+      </li>
+
+      <li>
+        Set up Prometheus and Grafana monitoring for deployed workloads,
+        tracking pod CPU, request throughput, and HTTP 5xx error rates
+        with alerting
+      </li>
+
+    </ul>
+
+
+    <div class="work-tags">
+
+      <span>GitLab CI</span>
+      <span>Azure DevOps</span>
+      <span>Argo CD</span>
+      <span>Helm</span>
+      <span>Prometheus</span>
+      <span>Grafana</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROJECTS
+     ========================================================= -->
+
+<section
+  class="reveal"
+  style="animation-delay:0.15s"
+  id="projects"
+>
+
+  <div class="eyebrow">
+    Projects
+  </div>
+
+
+  <div class="work-item">
+
+    <div class="work-head">
+
+      <h3 class="work-title">
+        k8s-ec2-operator
+      </h3>
+
+    </div>
+
+
+    <ul class="work-bullets">
+
+      <li>
+        Developed a Kubernetes operator in Go that provisions and manages
+        AWS EC2 instances declaratively via a custom CRD and controller-runtime
+        reconciliation loop
+      </li>
+
+      <li>
+        Packaged the operator with Helm, Kustomize, RBAC manifests,
+        and Prometheus monitoring, backed by automated CI/CD pipelines
+        (lint, unit, e2e tests) via GitHub Actions
+      </li>
+
+      <li>
+        Deployed and validated the operator on a local k3d cluster
+        using Kubebuilder
+      </li>
+
+    </ul>
+
+
+    <div class="work-tags">
+
+      <span>Go</span>
+      <span>Kubernetes</span>
+      <span>AWS EC2</span>
+      <span>Kubebuilder</span>
+      <span>k3d</span>
+      <span>GitHub Actions</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="work-item">
+
+    <div class="work-head">
+
+      <h3 class="work-title">
+        NASA (Not Another SRE Agent)
+      </h3>
+
+    </div>
+
+
+    <ul class="work-bullets">
+
+      <li>
+        Built a self-hosted Go agent that listens to GitHub Actions webhooks
+        and routes CI/CD failure alerts with AI-generated fix suggestions
+        to Slack, Discord, and Telegram
+      </li>
+
+      <li>
+        Designed a config-driven, modular architecture with unit test coverage
+        for webhook parsing and configuration loading
+      </li>
+
+      <li>
+        Containerized the agent with Docker Compose for single-command,
+        environment-configured deployment
+      </li>
+
+    </ul>
+
+
+    <div class="work-tags">
+
+      <span>Go</span>
+      <span>Docker</span>
+      <span>GitHub Actions</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     WRITING
+     ========================================================= -->
+
+<section
+  class="reveal"
+  style="animation-delay:0.2s"
+  id="writing"
+>
+
+  <div class="eyebrow">
+    Writing
+  </div>
+
+
+  <ul class="writing-list">
+
+
+    <!-- =====================================================
+         BLOG 1
+         ===================================================== -->
+
+    <li class="writing-item">
+
+      <div class="writing-header">
+
+        <a
+          class="writing-title"
+          href="https://lavishblog.hashnode.dev/lfx-mentorship-experience-kubernetes?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LFX Mentorship Experience: Kubernetes
+        </a>
+
+      </div>
+
+
+      <p class="writing-description">
+
+        A personal account of applying to LFX Mentorship multiple times,
+        eventually joining the Kubernetes project as a mentee, and working
+        on the Kubernetes API reference documentation generator.
+
+      </p>
+
+
+      <div class="writing-tags">
+
+        <span>
+          Kubernetes
+        </span>
+
+        <span>
+          LFX Mentorship
+        </span>
+
+        <span>
+          Open Source
+        </span>
+
+        <span>
+          SIG Docs
+        </span>
+
+      </div>
+
+
+      <button
+        class="writing-toggle"
+        type="button"
+        aria-expanded="false"
+      >
+        Read article
+      </button>
+
+
+      <div class="writing-content">
+
+
+        <h3>
+          Application Process
+        </h3>
+
+
+        <p>
+
+          My application process to LFX Mentorships has a very long history
+          to be honest. As far as I know I applied to the program
+          <strong>8 times and got rejected from 8 of them</strong>.
+          Each time I got rejected I learned things about different projects
+          and tried to understand why I was not the selected mentee.
+          These rejections made me learn the open source philosophy and
+          created a mindset that always tries to be “useful” for the team
+          while creating or improving a project and “never give up”.
+
+        </p>
+
+
+        <h3>
+          Acceptance
+        </h3>
+
+
+        <p>
+
+          But finally I applied for the 9th time and the notification popped
+          up on my screen at 00:02 am while I was working on the pull request.
+
+        </p>
+
+
+        <p>
+
+          I got the intuition to open Gmail to check whether I've been
+          accepted into the Linux Foundation Mentorship. It took me a moment
+          to digest that I had received an interview invitation for the LFX
+          Mentorship under the Kubernetes project with my mentors
+
+          <a
+            href="https://github.com/nate-double-u"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Nate Waddington
+          </a>,
+
+          <a
+            href="https://github.com/katcosgrove"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Kat Cosgrove
+          </a>,
+
+          <a
+            href="https://github.com/reylejano"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Rey Lejano
+          </a>
+
+          and
+
+          <a
+            href="https://github.com/salaxander"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Xander Grzywinski
+          </a>.
+
+        </p>
+
+
+        <p>
+
+          After receiving the interview email, I completed the task,
+          prepared the document as instructed, sent it to the SIG Docs team,
+          and scheduled the interview.
+
+        </p>
+
+
+        <p>
+
+          Interview started with warm welcome and introducing each other and
+          honestly it was a great moment to interviewing with people whom I
+          am really look up to in the community. We started the discussion
+          with the what are the problem I faced in running the Kubernetes
+          Reference Docs Generator, approach to make the reference docs
+          generation easy and I received the positive feedback from all
+          the mentors.
+
+        </p>
+
+
+        <p>
+
+          Again a notification popped up on my screen after few days.
+          DAM! It took me a while to digest that I've been accepted as an
+          LFX Mentee under the Kubernetes project.
+
+        </p>
+
+
+        <p>
+
+          My project aimed to improve the Kubernetes API reference docs
+          generator tool with undocumented failure points that only a few
+          people able to run. I worked on refactoring the code, improving
+          error messages, and updating documentation so anyone on the
+          release team can generate the reference docs confidently.
+
+        </p>
+
+
+        <p>
+
+          <strong>Github Link:</strong>
+
+          <a
+            href="https://github.com/kubernetes-sigs/reference-docs/issues/398"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Issue
+          </a>
+
+          ,
+
+          <a
+            href="https://github.com/kubernetes-sigs/reference-docs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Project
+          </a>
+
+        </p>
+
+
+        <p>
+
+          Achieving acceptance into the mentorship program doesn't come with
+          shortcuts. Every mentee including me has to go through the project
+          and try to understand the problem statement you'll be working on
+          during your mentorship.
+
+        </p>
+
+
+        <p>
+
+          Once the problem statement is understood, the next step is to do
+          your homework - try to understand the project, get yourself
+          familiar with the codebase, and so on.
+
+        </p>
+
+
+        <p>
+
+          The most important thing of all this is to keep connected with
+          your mentors irrespective of whether you get selected or not.
+          The main goal of mentorship should be to gain knowledge rather
+          than target getting accepted.
+
+        </p>
+
+
+        <h3>
+          Mentorship Kicks off
+        </h3>
+
+
+        <p>
+
+          During the start of the mentorship period, I had several
+          conversations with my mentors about the current problems
+          contributors face while working on the reference generator.
+          After receiving positive feedback, I began working on the issues.
+
+        </p>
+
+
+        <p>
+
+          All of my mentors were very flexible when it came to the time
+          required to complete a task. One of the best things about Nate
+          Waddington, Kat Cosgrove, Rey Lejano and Xander Grzywinski was
+          that each of them was completely comfortable with the flexible
+          timelines.
+
+        </p>
+
+
+        <p>
+
+          We were all working on the project asynchronously, and there were
+          many times when mentors were busy with other responsibilities.
+          However, none of this stopped any of us from staying up to date
+          with the project.
+
+        </p>
+
+
+        <p>
+
+          While the journey was exhilarating, it was not without moments
+          of self-doubt and occasional imposter syndrome. But then Nate,
+          Kat and Rey shared something with me.
+
+        </p>
+
+
+        <p>
+
+          During the mentorship phase, I learned a lot of stuff about how
+          API spec (OpenAPI spec v2, aka Swagger) works, how interfaces work,
+          and most importantly about writing clean code.
+
+        </p>
+
+
+        <p>
+
+          At every step, the mentors made sure to provide proper feedback
+          on my queries and pull requests, like what areas I needed to
+          improve, and so on.
+
+        </p>
+
+
+        <p>
+
+          Not only this, the mentorship also provided an opportunity to
+          submit a talk for the
+          <strong>
+            Maintainer Track KubeCon+CloudNativeCon Europe 2026
+          </strong>
+          with the mentor.
+
+        </p>
+
+
+        <h3>
+          Tips for future mentees
+        </h3>
+
+
+        <ul>
+
+          <li>
+            Be curious to learn and try to understand the project.
+          </li>
+
+          <li>
+            Do your research(homework) before asking question even if
+            they are too basic.
+          </li>
+
+          <li>
+            While submitting the cover letter make sure to outline the
+            approach you will follow to solve that problem and it doesn't
+            need to be perfect that's why mentors are there for to guide you.
+          </li>
+
+          <li>
+            Try to be in contact with mentors before and after the mentorship.
+          </li>
+
+        </ul>
+
+
+        <h3>
+          Conclusion
+        </h3>
+
+
+        <p>
+
+          The Mentorship is the valuable opportunity to learn new things
+          and emphasizing personal growth and professionally.
+
+          Even if you do not get selected in the first attempt like me,
+          try again for the next attempt with a strong profile.
+
+        </p>
+
+
+        <p>
+
+          For me, this mentorship holds a special place in my career.
+          It didn't just teach me about a specific tool or framework it
+          taught me lessons about open source, collaboration, discipline,
+          and long-term growth.
+
+        </p>
+
+
+        <a
+          class="writing-external"
+          href="https://lavishblog.hashnode.dev/lfx-mentorship-experience-kubernetes?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read the original article →
+        </a>
+
+      </div>
+
+    </li>
+
+
+    <!-- =====================================================
+         BLOG 2
+         ===================================================== -->
+
+    <li class="writing-item">
+
+      <div class="writing-header">
+
+        <a
+          class="writing-title"
+          href="https://lavishblog.hashnode.dev/demystify-the-kubeconfig-file?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Demystify the kubeconfig file
+        </a>
+
+      </div>
+
+
+      <p class="writing-description">
+
+        A practical introduction to the Kubernetes kubeconfig file,
+        covering its structure, fields, authentication details, and how
+        it helps users connect to and manage Kubernetes clusters.
+
+      </p>
+
+
+      <div class="writing-tags">
+
+        <span>
+          Kubernetes
+        </span>
+
+        <span>
+          kubeconfig
+        </span>
+
+        <span>
+          Cloud Native
+        </span>
+
+        <span>
+          DevOps
+        </span>
+
+      </div>
+
+
+      <button
+        class="writing-toggle"
+        type="button"
+        aria-expanded="false"
+      >
+        Read article
+      </button>
+
+
+      <div class="writing-content">
+
+        <p>
+
+          When managing Kubernetes clusters, one of the essential components
+          you'll interact with is the kubeconfig file. This configuration
+          file is a critical element in Kubernetes' architecture, as it
+          holds the details required to connect to and authenticate with
+          one or more clusters.
+
+        </p>
+
+
+        <p>
+
+          Whether you're working on a local development cluster or managing
+          a large-scale production environment, understanding and effectively
+          utilizing the kubeconfig file is key to streamlining your
+          Kubernetes workflow.
+
+        </p>
+
+
+        <p>
+
+          In this blog post, we'll dive into the structure of the kubeconfig
+          file, explore its various fields and options, and provide practical
+          tips for managing and customizing your kubeconfig setup to enhance
+          your Kubernetes experience.
+
+        </p>
+
+
+        <a
+          class="writing-external"
+          href="https://lavishblog.hashnode.dev/demystify-the-kubeconfig-file?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read the original article →
+        </a>
+
+      </div>
+
+    </li>
+
+
+    <!-- =====================================================
+         BLOG 3
+         ===================================================== -->
+
+    <li class="writing-item">
+
+      <div class="writing-header">
+
+        <a
+          class="writing-title"
+          href="https://lavishblog.hashnode.dev/accessing-everything-in-kubernetes-cluster-using-rest-api-calls?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Accessing everything in Kubernetes Cluster using REST API Calls
+        </a>
+
+      </div>
+
+
+      <p class="writing-description">
+
+        A deep dive into accessing Kubernetes resources through REST API
+        calls, including the concepts of Group, Version, Kind (GVK) and
+        Group, Version, Resource (GVR).
+
+      </p>
+
+
+      <div class="writing-tags">
+
+        <span>
+          Kubernetes
+        </span>
+
+        <span>
+          REST API
+        </span>
+
+        <span>
+          GVK
+        </span>
+
+        <span>
+          GVR
+        </span>
+
+        <span>
+          API
+        </span>
+
+      </div>
+
+
+      <button
+        class="writing-toggle"
+        type="button"
+        aria-expanded="false"
+      >
+        Read article
+      </button>
+
+
+      <div class="writing-content">
+
+        <p>
+
+          In this blog we will be deep diving into how you can access
+          Kubernetes cluster using REST API Calls and concepts of
+          GVK(Group Version Kind) and GVR(Group Version Resource).
+
+        </p>
+
+
+        <a
+          class="writing-external"
+          href="https://lavishblog.hashnode.dev/accessing-everything-in-kubernetes-cluster-using-rest-api-calls?utm_source=hashnode&amp;utm_medium=feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read the original article →
+        </a>
+
+      </div>
+
+    </li>
+
+  </ul>
+
+</section>
+
+
+<!-- =========================================================
+     TALKS
+     ========================================================= -->
+
+<section
+  class="reveal"
+  style="animation-delay:0.25s"
+  id="talks"
+>
+
+  <div class="eyebrow">
+    Talks
+  </div>
+
+
+  <ul class="flat-list">
+
+
+    <li>
+
+      <a
+        class="title"
+        href="https://youtu.be/BcLKvLD2D2Y?si=6EMCuXwWbkUADVQ0"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        etcd in 2026: Enhancements, V3.7 Roadmap, and Community Growth
+      </a>
+
+      <span class="meta">
+        KubeCon India
+      </span>
+
+    </li>
+
+
+    <li>
+
+      <a
+        class="title"
+        href="https://youtu.be/YxZR4mISycg?si=N5b_JMMn9iSofFOV"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Lightning Talk: From Learner To Contributor: A LFX Mentee's Kubernetes Story
+      </a>
+
+      <span class="meta">
+        KubeCon EU
+      </span>
+
+    </li>
+
+
+    <li>
+
+      <a
+        class="title"
+        href="https://youtu.be/xnHsQE7bg7o?si=jYVvxenIqM7pqNI7"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        SIG Docs and You: The New Chapter of the Kubernetes API Reference Generator
+      </a>
+
+      <span class="meta">
+        KubeCon EU
+      </span>
+
+    </li>
+
+
+    <li>
+
+      <a
+        class="title"
+        href="https://www.youtube.com/live/0J3jSLn4GZM?si=qY2yJvkSOkjlXwcj"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Kube-Green: Scaling Kubernetes for a Greener Tomorrow
+      </a>
+
+      <span class="meta">
+        Cloud Native Sustainability Week
+      </span>
+
+    </li>
+
+
+  </ul>
+
+</section>
+
+
+<!-- =========================================================
+     COMMUNITY
+     ========================================================= -->
+
+<section
+  class="reveal"
+  style="animation-delay:0.3s"
+>
+
+  <div class="eyebrow">
+    Community
+  </div>
+
+
+  <ul class="flat-list">
+
+
+    <li>
+
+      <span class="title">
+        Kubernetes Release Team — v1.32
+      </span>
+
+      <span class="meta">
+        Docs &amp; deprecations
+      </span>
+
+      <p class="community-description">
+
+        Worked with the Kubernetes release team on document changes,
+        deprecations, and new features for the v1.32 release cycle.
+
+      </p>
+
+    </li>
+
+
+    <li>
+
+      <span class="title">
+        KubeCon Europe 2025
+      </span>
+
+      <span class="meta">
+        Communications Team Member
+      </span>
+
+      <p class="community-description">
+
+        Served on the Maintainer Summit Communications team, coordinating
+        content and ensuring messaging reached the CNCF community.
+
+      </p>
+
+    </li>
+
+
+    <li>
+
+      <span class="title">
+        CNCG Gurugram
+      </span>
+
+      <span class="meta">
+        Core Team Member
+      </span>
+
+      <p class="community-description">
+
+        Organized meetups and events for the cloud-native community,
+        engaging over 400 participants and empowering contributors
+        to get involved in open source.
+
+      </p>
+
+    </li>
+
+
+  </ul>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+
+<section
+  class="contact reveal"
+  style="animation-delay:0.35s"
+  id="contact"
+>
+
+  <h2>
+    Get in touch
+  </h2>
+
+
+  <p>
+
+    Looking for junior DevOps, SRE, and platform engineering roles.
+    Open source contributor first — happy to talk through any of the work above.
+
+  </p>
+
+
+  <div class="links">
+
+    <a href="mailto:lvishpal408@gmail.com">
+      Email
+    </a>
+
+
+    <a
+      href="https://www.github.com/lavishpal"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub
+    </a>
+
+
+    <a
+      href="https://linkedin.com/in/lavish-pal"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn
+    </a>
+
+
+    <a
+      href="https://x.com/lavishpal408"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      X
+    </a>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+  Built by hand · updated 2026
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+  (function(){
+
+    /* =======================================================
+       THEME TOGGLE
+       ======================================================= */
+
+    var toggle = document.getElementById('theme-toggle');
+
+    var root = document.documentElement;
+
+
+    function currentTheme(){
+
+      return root.getAttribute('data-theme') === 'dark'
+        ? 'dark'
+        : 'light';
+
+    }
+
+
+    function updateLabel(){
+
+      var t = currentTheme();
+
+
+      toggle.setAttribute(
+        'aria-label',
+        t === 'dark'
+          ? 'Switch to light theme'
+          : 'Switch to dark theme'
+      );
+
+    }
+
+
+    updateLabel();
+
+
+    toggle.addEventListener('click', function(){
+
+      var next =
+        currentTheme() === 'dark'
+          ? 'light'
+          : 'dark';
+
+
+      root.setAttribute(
+        'data-theme',
+        next
+      );
+
+
+      try{
+
+        localStorage.setItem(
+          'theme',
+          next
+        );
+
+      }catch(e){}
+
+
+      updateLabel();
+
+    });
+
+
+    /* =======================================================
+       NAVIGATION BORDER ON SCROLL
+       ======================================================= */
+
+    var nav =
+      document.getElementById('site-nav');
+
+
+    function onScroll(){
+
+      if(window.scrollY > 4){
+
+        nav.classList.add('scrolled');
+
+      }else{
+
+        nav.classList.remove('scrolled');
+
+      }
+
+    }
+
+
+    onScroll();
+
+
+    window.addEventListener(
+      'scroll',
+      onScroll,
+      { passive: true }
+    );
+
+
+    /* =======================================================
+       WRITING ARTICLE TOGGLES
+       ======================================================= */
+
+    var writingToggles =
+      document.querySelectorAll('.writing-toggle');
+
+
+    writingToggles.forEach(function(button){
+
+      button.addEventListener('click', function(){
+
+        var article =
+          button.nextElementSibling;
+
+
+        var isOpen =
+          article.classList.contains('open');
+
+
+        article.classList.toggle(
+          'open'
+        );
+
+
+        button.setAttribute(
+          'aria-expanded',
+          String(!isOpen)
+        );
+
+
+        button.textContent =
+          isOpen
+            ? 'Read article'
+            : 'Hide article';
+
+      });
+
+    });
+
+  })();
+
+</script>
+
+
+</body>
+</html>
