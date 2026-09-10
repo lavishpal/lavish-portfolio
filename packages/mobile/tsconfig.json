@@ -1,0 +1,12 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    // The typed API client imports `@template/web`, which pulls the Hono/Bun
+    // server files (and their `process.env` access) into this program.
+    "types": ["bun"],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
